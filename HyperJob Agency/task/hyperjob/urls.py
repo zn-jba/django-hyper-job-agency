@@ -18,14 +18,33 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.views.generic import RedirectView
 
 from .views import IndexView
+from .views import LoginView
+from .views import LogoutView
+from .views import SignupView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin"),
     path("", IndexView.as_view(), name="index"),
-    path("", include("resume.urls")),
-    path("", include("vacancy.urls")),
+    path("home", RedirectView.as_view(url=""), name="home"),
+    path("home/", RedirectView.as_view(url="")),
+
+    path("login", LoginView.as_view(), name="login"),
+    path("login/", RedirectView.as_view(url="/login")),
+
+    path("logout", LogoutView.as_view(), name="logout"),
+    path("logout/", RedirectView.as_view(url="/logout")),
+
+    path("signup", SignupView.as_view(), name="signup"),
+    path("signup/", RedirectView.as_view(url="/signup")),
+
+    path("resumes/", RedirectView.as_view(url="/resumes")),
+    path("vacancies/", RedirectView.as_view(url="/vacancies")),
+
+    path("resumes", include("resume.urls")),
+    path("vacancies", include("vacancy.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL)

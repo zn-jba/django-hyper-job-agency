@@ -1,0 +1,14 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+    <h2>Login</h2>
+    {% if user.is_authenticated %}
+        <p>Welcome <strong>{{ user.username }}</strong></p>
+    {% else %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            <button type="submit">Log in</button>
+        </form>
+    {% endif %}
+{% endblock %}
