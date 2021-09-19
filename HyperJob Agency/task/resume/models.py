@@ -5,3 +5,6 @@ from django.db import models
 class Resume(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=1024)
+
+    def __str__(self) -> str:
+        return self.author.username
