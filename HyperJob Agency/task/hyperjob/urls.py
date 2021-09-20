@@ -21,6 +21,7 @@ from django.urls import path
 from django.views.generic import RedirectView
 
 from .views import IndexView
+from .views import HomeView
 from .views import LoginView
 from .views import LogoutView
 from .views import SignupView
@@ -28,8 +29,9 @@ from .views import SignupView
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path("", IndexView.as_view(), name="index"),
-    path("home", RedirectView.as_view(url=""), name="home"),
-    path("home/", RedirectView.as_view(url="")),
+
+    path("home", HomeView.as_view(), name="home"),
+    path("home/", RedirectView.as_view(url="/home")),
 
     path("login", LoginView.as_view(), name="login"),
     path("login/", RedirectView.as_view(url="/login")),
@@ -40,11 +42,8 @@ urlpatterns = [
     path("signup", SignupView.as_view(), name="signup"),
     path("signup/", RedirectView.as_view(url="/signup")),
 
-    path("resumes/", RedirectView.as_view(url="/resumes")),
-    path("vacancies/", RedirectView.as_view(url="/vacancies")),
-
-    path("resumes", include("resume.urls")),
-    path("vacancies", include("vacancy.urls")),
+    path("", include("resume.urls")),
+    path("", include("vacancy.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL)

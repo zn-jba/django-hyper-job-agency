@@ -11,12 +11,30 @@ from django.shortcuts import render
 from django.views import View
 
 from .forms import SignupForm
+from resume.models import Resume
+from vacancy.models import Vacancy
 
 
 class IndexView(View):
     @staticmethod
     def get(request: HttpRequest) -> HttpResponse:
-        return render(request, "layout/base.html", context={"title": "Home"})
+        return render(request, "index.html", context={"title": "HyperJob Agency"})
+
+
+class HomeView(View):
+    @staticmethod
+    def get(request: HttpRequest) -> HttpResponse:
+        context = {
+            "title": "Home",
+        }
+
+        if request.user.is_authenticated:
+            if request.user.is_staff:
+                context["vacancies"] = Vacancy.objects.filter(author=request.user)
+            else:
+                context["resumes"] = Resume.objects.filter(author=request.user)
+
+        return render(request, "home.html", context)
 
 
 class LoginView(View):

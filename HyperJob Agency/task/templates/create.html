@@ -1,0 +1,14 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+    <h2>Add {% if vacancy_form %}Vacancy{% elif resume_form %}{% endif %}</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if vacancy_form %}
+            {{ vacancy_form.as_p }}
+        {% elif resume_form %}
+            {{ resume_form.as_p }}
+        {% endif %}
+        <button type="submit">Add</button>
+    </form>
+{% endblock %}

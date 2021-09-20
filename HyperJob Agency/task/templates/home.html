@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+    <h2>Home</h2>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <h3>Staff</h3>
+            <form action="{% url 'vacancy:new' %}" method="get">
+                {% csrf_token %}
+                <button type="submit">Add Vacancy</button>
+            </form>
+            <br>
+            {% for vacancy in vacancies %}
+                <div>{{ vacancy.author.username }}: {{ vacancy.description }}</div>
+            {% endfor %}
+        {% else %}
+            <h3>User</h3>
+            <form action="{% url 'resume:new' %}" method="get">
+                {% csrf_token %}
+                <button type="submit">Add Resume</button>
+            </form>
+            <br>
+            {% for resume in resumes %}
+                <div>{{ resume.author.username }}: {{ resume.description }}</div>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <p>Sign up if you would like to get the full experience.</p>
+    {% endif %}
+{% endblock %}
