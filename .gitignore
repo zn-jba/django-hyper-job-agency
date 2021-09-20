@@ -1,3 +1,9 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -137,19 +143,3 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
-
-HyperJob Agency/Authentication
-HyperJob Agency/Creating models
-HyperJob Agency/Creating new vacancies and resumes
-HyperJob Agency/Main menu
-HyperJob Agency/task/test
-HyperJob Agency/task/tests.py
-HyperJob Agency/Vacancy and resume pages
-HyperJob Agency/lesson-info.yaml
-course-info.yaml
-course-remote-info.yaml
